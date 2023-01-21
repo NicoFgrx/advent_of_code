@@ -1,5 +1,8 @@
-# advent_of_code
+# Advent of Code
 
-Simple repo where I train for the advent calendar offered by advent of code website.
+Repository Git dédié aux challenges de programmation du site [`AdventofCode`](https://adventofcode.com/)
 
-Do I deserve my gifts? Challengne accepted
+## Structure du repository
+
+ - [`2022`](2022) contient les challenges de l'année citée;
+ - [`template`](template) contient les fichiers de ctype pour la résolution d'un jour;
