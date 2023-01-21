@@ -1,7 +1,5 @@
 input_file = "input.txt"
 
-
-
 def first_part():
     with open(input_file, 'r') as file:
         pass
