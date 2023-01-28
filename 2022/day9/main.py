@@ -56,25 +56,28 @@ class Point:
 
             # tail in touch ?            
             if self == tail:
-                print("Object moving is the tail")
+                # print("Object moving is the tail")
                 return 0
                      
             if not tail.is_contact(self.x, self.y):      
-                if [self.x, self.y] not in points_tail_lst:                    
-                    points_tail_lst.append([self.x, self.y]) # save last position    
+                if [tail.x, tail.y] not in points_tail_lst:                    
+                    points_tail_lst.append([tail.x, tail.y]) # save last position    
+                    # print(points_tail_lst)
 
-                else:
-                    print("DEBUG : Tail has already passed this way ")    
+                # else:
+                #     print("DEBUG : Tail has already passed this way ")    
                 
-                #tail.move(direction, 1)  
+                tail.move(direction, 1)  
                 
-                # disgusting move, but works
+                # # disgusting move, but works
                 tail.x = self.x
                 tail.y = self.y 
                 tail.move(opposite_directions_dct[direction], 1)
+            # else:
+            #     print("DEBUG : tail can touch the head ")
 
             print("DEBUG : head ({},{}), tail ({},{})".format(self.x, self.y, tail.x, tail.y))
-
+            
         return "Moving...", self.x, self.y
 
 
@@ -110,20 +113,59 @@ def second_part():
     with open(input_file, 'r') as file:
         pass
 
+def display_map():
+    max_x = 0
+    max_y = 0
+
+    min_x = 0
+    min_y = 0
+    for points in points_tail_lst:
+        x, y = points           
+        if x > max_x:
+            max_x = x
+        if y > max_y:
+            max_y = y
+        if x < min_x:
+            min_x = x
+        if y < min_y:
+            min_y = y
+
+    print("="*50)
+    for y in range(max_y,min_y,-1):
+        for x in range(min_x, max_x+1,1):
+            if [x,y] == [0, 0]:
+                print("s", end='')
+                continue
+            if [x, y] in points_tail_lst:
+                print("x", end='')
+                continue
+            print(".", end='')
+        print()
+    
+    print("="*50)
+
+
+
 
 def main():
 
     head = Point(0, 0)
     tail = Point(0, 0)
 
+    points_tail_lst.append([0,0])
+
     points_dct['head'] = head
     points_dct['tail'] = tail
 
+
     
-    # Wrong guess : 6557
+    # Wrong guess : 6557 (to high)
+    # New guess : 
 
     first_result = first_part()
     print("The first result is {}".format(first_result))
+
+    display_map()
 
     second_result = second_part()
     print("The second result is {}".format(second_result))
